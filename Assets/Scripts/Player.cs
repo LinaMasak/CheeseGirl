@@ -1,4 +1,4 @@
-using System.Collections;
+    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -13,7 +13,8 @@ public class Player : MonoBehaviour
     public TMP_Text scoreDisplay;
     private int score = 0;
     public GameObject door;
-    
+    public int heart = 3;
+    public List<GameObject> hearts = new List<GameObject>();
 
 
     // Start is called before the first frame update
@@ -24,6 +25,43 @@ public class Player : MonoBehaviour
         rb.freezeRotation = true;
 
         rb.gravityScale = 0;
+
+        hearts.Add(GameObject.Find("Heart1"));
+        hearts.Add(GameObject.Find("Heart2"));
+        hearts.Add(GameObject.Find("Heart3"));
+
+        // antal hjärtan sparat i fil
+        if(PlayerPrefs.HasKey("hearts"))
+        {
+            heart = PlayerPrefs.GetInt("hearts");
+
+            // ta bort hjärtan om det ska vara färre än 3
+            if (heart == 1)
+            {
+                Destroy(hearts[0]);
+                hearts.RemoveAt(0); 
+                Destroy(hearts[0]);
+                hearts.RemoveAt(0);
+            }
+            if (heart == 2)
+            {
+                Destroy(hearts[0]);
+                hearts.RemoveAt(0);
+            }
+
+
+
+        }
+        else
+        {
+            // inte sparat i fil
+            PlayerPrefs.SetInt("hearts", 3);
+        }
+        
+
+
+
+
 
     }
 
@@ -66,11 +104,34 @@ public class Player : MonoBehaviour
 
         if (collision.gameObject.name.StartsWith("Troll"))
         {
+            // ta bort ett hjärta
+            Destroy(hearts[0]);
+            hearts.RemoveAt(0);
+            heart = heart - 1;
+            UnityEngine.Debug.Log("heart " + heart);
+            PlayerPrefs.SetInt("hearts", heart);
+
+            UnityEngine.Debug.Log("hearts player prefs " + PlayerPrefs.GetInt("hearts"));
+            // finns hjärtan kvar
 
             UnityEngine.Debug.Log("collision Troll");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+            // hjärtan slut
+            // börja från scen 1
+            if (heart == 0)
+            {
+                heart = 3;
+                PlayerPrefs.SetInt("hearts", 3);
+                SceneManager.LoadScene("Level1");
+            }
+            else
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
 
         }
+
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -94,9 +155,28 @@ public class Player : MonoBehaviour
             if (door.IsOpen)
             {
                 UnityEngine.Debug.Log("next level");
-                
-                //game.NextLevel();
+                // om level är 1 gå till level 2
+                // om level är 2 gå till level 3
+                if (SceneManager.GetActiveScene().name == "Level1")
+                {
+                    PlayerPrefs.SetInt("hearts", heart);
+                    SceneManager.LoadScene("Level2");
+                }
+
+                else if (SceneManager.GetActiveScene().name == "Level2")
+                {
+                    PlayerPrefs.SetInt("hearts", heart);
+                    SceneManager.LoadScene("Level3");
+                }
+
+                if (SceneManager.GetActiveScene().name == "Level3")
+                {
+                    PlayerPrefs.SetInt("hearts", heart);
+                    SceneManager.LoadScene("Level4");
+                }
             }
+
+
         }
 
 

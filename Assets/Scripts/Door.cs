@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Door : MonoBehaviour
 {
@@ -35,4 +36,21 @@ public class Door : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = openSprite;
         IsOpen = true;
     }
+
+
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.name.StartsWith("Player"))
+        {
+            if (isOpen)
+            {
+                UnityEngine.Debug.Log("collision Player");
+                //SceneManager.LoadScene("Level2");
+            }
+
+        }
+
+    }
+
 }

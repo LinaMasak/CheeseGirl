@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class World : MonoBehaviour
  {
@@ -8,6 +10,7 @@ public class World : MonoBehaviour
     public GameObject sandprefab;
     public GameObject grassprefab;
     public GameObject crystalprefab;
+    public GameObject trollprefab;
 
     // Start is called before the first frame update
     void Start()
@@ -41,9 +44,39 @@ public class World : MonoBehaviour
 
         for (int i = 0; i < 10; i++)
         {
-            float x = Random.Range(1, 24);
-            float y = Random.Range(1, 10);
+            float x = UnityEngine.Random.Range(2, 24);
+            float y = UnityEngine.Random.Range(2, 10);
             Instantiate(crystalprefab, new Vector2(x, y), Quaternion.identity);
+        }
+        
+        if (SceneManager.GetActiveScene().name=="Level2")
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                float x = UnityEngine.Random.Range(2, 24);
+                float y = UnityEngine.Random.Range(2, 10);
+                Instantiate(trollprefab, new Vector2(x, y), Quaternion.identity);
+            }
+        }
+
+        if (SceneManager.GetActiveScene().name == "Level3")
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                float x = UnityEngine.Random.Range(2, 24);
+                float y = UnityEngine.Random.Range(2, 10);
+                Instantiate(trollprefab, new Vector2(x, y), Quaternion.identity);
+            }
+        }
+
+        if (SceneManager.GetActiveScene().name == "Level4")
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                float x = UnityEngine.Random.Range(2, 24);
+                float y = UnityEngine.Random.Range(2, 10);
+                Instantiate(trollprefab, new Vector2(x, y), Quaternion.identity);
+            }
         }
 
     }
