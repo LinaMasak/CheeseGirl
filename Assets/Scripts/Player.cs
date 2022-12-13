@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     private int score = 0;
     public GameObject door;
     public int heart = 3;
+    private int goalScore = 10;
     public List<GameObject> hearts = new List<GameObject>();
 
 
@@ -57,8 +58,18 @@ public class Player : MonoBehaviour
             // inte sparat i fil
             PlayerPrefs.SetInt("hearts", 3);
         }
-        
+        // läs score från pref om det finns.
 
+        if (PlayerPrefs.HasKey("score"))
+        {
+            score = PlayerPrefs.GetInt("score");
+            // dom man har plus 10
+            goalScore = score + 10;
+        }
+        else
+        {
+            PlayerPrefs.SetInt("score", 0);
+        }
 
 
 
@@ -123,6 +134,7 @@ public class Player : MonoBehaviour
             {
                 heart = 3;
                 PlayerPrefs.SetInt("hearts", 3);
+                PlayerPrefs.SetInt("score", 0);
                 SceneManager.LoadScene("Level1");
             }
             else
@@ -139,7 +151,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.name.StartsWith("Crystal"))
         {
             score = score + 1;
-            if (score >= 10 )
+            if (score >= goalScore )
             {
                 door.GetComponent<Door>().IsOpen = true;
             }
@@ -160,18 +172,21 @@ public class Player : MonoBehaviour
                 if (SceneManager.GetActiveScene().name == "Level1")
                 {
                     PlayerPrefs.SetInt("hearts", heart);
+                    PlayerPrefs.SetInt("score", score);
                     SceneManager.LoadScene("Level2");
                 }
 
                 else if (SceneManager.GetActiveScene().name == "Level2")
                 {
                     PlayerPrefs.SetInt("hearts", heart);
+                    PlayerPrefs.SetInt("score", score);
                     SceneManager.LoadScene("Level3");
                 }
 
                 if (SceneManager.GetActiveScene().name == "Level3")
                 {
                     PlayerPrefs.SetInt("hearts", heart);
+                    PlayerPrefs.SetInt("score", score);
                     SceneManager.LoadScene("Level4");
                 }
             }
