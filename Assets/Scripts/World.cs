@@ -42,7 +42,7 @@ public class World : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 15; i++)
         {
             float x = UnityEngine.Random.Range(2, 24);
             float y = UnityEngine.Random.Range(2, 10);
