@@ -189,6 +189,13 @@ public class Player : MonoBehaviour
                     PlayerPrefs.SetInt("score", score);
                     SceneManager.LoadScene("Level4");
                 }
+
+                if (SceneManager.GetActiveScene().name == "Level4")
+                {
+                    PlayerPrefs.SetInt("hearts", heart);
+                    PlayerPrefs.SetInt("score", score);
+                    SceneManager.LoadScene("Level5");
+                }
             }
 
 

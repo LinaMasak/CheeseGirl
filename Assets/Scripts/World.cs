@@ -79,6 +79,16 @@ public class World : MonoBehaviour
             }
         }
 
+        if (SceneManager.GetActiveScene().name == "Level5")
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                float x = UnityEngine.Random.Range(2, 24);
+                float y = UnityEngine.Random.Range(2, 10);
+                Instantiate(trollprefab, new Vector2(x, y), Quaternion.identity);
+            }
+        }
+
     }
 
     // Update is called once per frame
