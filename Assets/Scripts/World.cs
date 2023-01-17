@@ -15,12 +15,12 @@ public class World : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for(int x = 0; x < 25; x++)
+        for (int x = 0; x < 25; x++)
         {
             Instantiate(wallprefab, new Vector2(x, 0), Quaternion.identity);
             Instantiate(wallprefab, new Vector2(x, 10), Quaternion.identity);
         }
-        for(int y = 0; y < 10; y++)
+        for (int y = 0; y < 10; y++)
         {
             Instantiate(wallprefab, new Vector2(0, y), Quaternion.identity);
             Instantiate(wallprefab, new Vector2(24, y), Quaternion.identity);

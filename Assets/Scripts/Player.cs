@@ -155,9 +155,10 @@ public class Player : MonoBehaviour
             {
                 door.GetComponent<Door>().IsOpen = true;
             }
+            Destroy(collision.gameObject);
             scoreDisplay.text = "Score: " + score;
             UnityEngine.Debug.Log("collision crystal");
-            Destroy(collision.gameObject);
+            
 
         }
         

@@ -15,3 +15,4 @@ Fixa fler levlar så man kan samla fler poäng.
 Skapa en "store" där man kan köpa saker för sina poäng. 
 Skapa en portal.
 Fixa fler väggar som gör det svårare.
+Komma på fler hinder som gör det lite roligare.
